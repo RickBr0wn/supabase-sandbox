@@ -63,7 +63,12 @@ const LogIn = (): JSX.Element => {
 			) : (
 				<p style={{ opacity: 0 }}>unknown</p>
 			)}
-			Don&apos;t have an account? <Link href='/signup'>Sign up</Link>
+			<p>
+				Don&apos;t have an account? <Link href='/signup'>Sign up</Link>
+			</p>
+			<p>
+				Forgotten your password? <Link href='/reset'>Reset</Link>
+			</p>
 		</div>
 	)
 }

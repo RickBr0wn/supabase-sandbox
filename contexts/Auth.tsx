@@ -12,6 +12,7 @@ interface _AuthContext {
 	user: User | null
 	session: Session | null
 	loading: boolean
+	forgotPassword: (email: string) => Promise<ApiError | null>
 	signUp: (email: string, password: string) => Promise<_AuthResponse>
 	signIn: (email: string, password: string) => Promise<_AuthResponse>
 	signOut: () => Promise<ApiError | null>
@@ -98,10 +99,18 @@ export const AuthProvider = ({ children }: _AuthProviderProps) => {
 		return error
 	}
 
+	const forgotPassword = async (email: string): Promise<ApiError | null> => {
+		setLoading(true)
+		const { error } = await supabase.auth.api.resetPasswordForEmail(email)
+		setLoading(false)
+		return error
+	}
+
 	const value = {
 		user,
 		session,
 		loading,
+		forgotPassword,
 		signUp,
 		signIn,
 		signOut
