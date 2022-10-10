@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { useState } from 'react'
+import ProtectedRoute from '../components/protected'
 import { useAuth } from '../contexts/Auth'
 
 const ResetPassword = (): JSX.Element => {
@@ -32,7 +33,7 @@ const ResetPassword = (): JSX.Element => {
 	}
 
 	return (
-		<div>
+		<ProtectedRoute>
 			<h1>Reset Password</h1>
 			<form
 				onSubmit={handleSubmit}
@@ -64,7 +65,7 @@ const ResetPassword = (): JSX.Element => {
 			<Link href='/login'>
 				<a>Back to login</a>
 			</Link>
-		</div>
+		</ProtectedRoute>
 	)
 }
 
