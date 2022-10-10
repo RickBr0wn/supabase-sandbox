@@ -48,27 +48,48 @@ const LogIn = (): JSX.Element => {
 	}
 
 	return (
-		<div>
-			<h1>LogIn</h1>
-			<form
-				onSubmit={handleSubmit}
-				style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}
-			>
-				<input type='email' ref={emailRef} required />
-				<input type='password' ref={passwordRef} required />
-				<button type='submit'>Log In</button>
-			</form>
-			{error ? (
-				<p style={{ opacity: 1, color: 'red' }}>{error}</p>
-			) : (
-				<p style={{ opacity: 0 }}>unknown</p>
-			)}
-			<p>
-				Don&apos;t have an account? <Link href='/signup'>Sign up</Link>
-			</p>
-			<p>
-				Forgotten your password? <Link href='/reset'>Reset</Link>
-			</p>
+		<div className='mt-14 flex flex-col justify-center items-center'>
+			<h1 className='text-3xl font-bold'>Welcome back</h1>
+			<div className='border-2 p-4 rounded-md mx-4 max-w-xl mt-10'>
+				<form
+					onSubmit={handleSubmit}
+					className='flex flex-col items-center gap-4'
+				>
+					<input
+						className='border-2 w-full'
+						type='email'
+						ref={emailRef}
+						required
+					/>
+					<input
+						className='border-2 w-full'
+						type='password'
+						ref={passwordRef}
+						required
+					/>
+					<button className='border-2 w-full' type='submit'>
+						Log In
+					</button>
+				</form>
+				{error ? (
+					<p style={{ opacity: 1, color: 'red' }}>{error}</p>
+				) : (
+					<p style={{ opacity: 0 }}>unknown</p>
+				)}
+				<div className='text-xs w-full flex flex-col justify-center items-center gap-2'>
+					<Link href='/signup'>
+						<span className='text-blue-500 underline cursor-pointer'>
+							Don&apos;t have an account?
+						</span>
+					</Link>
+
+					<Link href='/reset'>
+						<span className='text-blue-500 underline cursor-pointer'>
+							Forgotten your password?
+						</span>
+					</Link>
+				</div>
+			</div>
 		</div>
 	)
 }
