@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { ReactNode } from 'react'
 import { useAuth } from '../contexts/Auth'
 
@@ -8,20 +9,10 @@ interface _ProtectedRouteProps {
 
 const ProtectedRoute = ({ children }: _ProtectedRouteProps) => {
 	const { user, session } = useAuth()
+	const router = useRouter()
 
 	if (!user || !session) {
-		return (
-			<div>
-				<h1>Not authorized</h1>
-				<p>You must be signed in to view this page. </p>
-				<div
-					style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}
-				>
-					<Link href={'/login'}>Log in</Link>
-					<Link href={'/signup'}>Sign up</Link>
-				</div>
-			</div>
-		)
+		router.push('/login')
 	}
 
 	return <div>{children}</div>

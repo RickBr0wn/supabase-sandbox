@@ -1,5 +1,6 @@
 import { ReactNode } from 'react'
 import Navbar from './navbar'
+import ScreenSize from './screen-size'
 
 interface _LayoutProps {
 	children: ReactNode
@@ -8,6 +9,8 @@ interface _LayoutProps {
 const Layout = ({ children }: _LayoutProps): JSX.Element => {
 	return (
 		<div>
+			<ScreenSize />
+
 			<Navbar />
 			{children}
 		</div>
