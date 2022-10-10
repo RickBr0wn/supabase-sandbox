@@ -1,5 +1,6 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
+import BlurImageOnLoad from '../components/blur-image'
 import { useAuth } from '../contexts/Auth'
 import { useDatabase } from '../contexts/Database'
 import Dashboard from './dashboard'
@@ -22,20 +23,27 @@ const Home: NextPage = () => {
 			<div>
 				{products.map(product => (
 					<div key={product.id}>
-						<h3>{product.product_name}</h3>
-						<div>
-							{product.product_image.map(image => (
-								<img
-									key={image}
-									src={image}
-									alt={product.product_name}
-									width='100'
-								/>
-							))}
+						<div className='max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8 '>
+							<div className='grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8'>
+								<div>
+									<h3>{product.product_name}</h3>
+									{product.product_image.map(image => (
+										<BlurImageOnLoad
+											key={product.id}
+											image={{
+												id: product.id,
+												href: `/products/${product.id}`,
+												imageSrc: image,
+												name: product.product_name
+											}}
+										/>
+									))}
+									<p>{product.product_description}</p>
+									<p>{product.product_price}</p>
+									<p>{product.product_quantity}</p>
+								</div>
+							</div>
 						</div>
-						<p>{product.product_description}</p>
-						<p>{product.product_price}</p>
-						<p>{product.product_quantity}</p>
 					</div>
 				))}
 			</div>

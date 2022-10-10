@@ -1,6 +1,6 @@
 import ProtectedRoute from '../components/protected'
 
-const WishList = () => {
+const WishList = (): JSX.Element => {
 	return (
 		<ProtectedRoute>
 			<div>
