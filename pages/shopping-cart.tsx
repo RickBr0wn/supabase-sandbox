@@ -1,6 +1,6 @@
 import ProtectedRoute from '../components/protected'
 
-const ShoppingCart = () => {
+const ShoppingCart = (): JSX.Element => {
 	return (
 		<ProtectedRoute>
 			<div>
