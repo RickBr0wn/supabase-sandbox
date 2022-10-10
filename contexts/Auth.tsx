@@ -1,4 +1,4 @@
-import { ApiError, Session, User } from '@supabase/supabase-js'
+import { ApiError, PostgrestError, Session, User } from '@supabase/supabase-js'
 import {
 	createContext,
 	ReactNode,
@@ -25,7 +25,7 @@ interface _AuthProviderProps {
 interface _AuthResponse {
 	user: User | null
 	session: Session | null
-	error: ApiError | null
+	error: ApiError | PostgrestError | null
 }
 
 const AuthContext = createContext({} as _AuthContext)
@@ -74,6 +74,25 @@ export const AuthProvider = ({ children }: _AuthProviderProps) => {
 			email,
 			password
 		})
+
+		if (error) {
+			return { user, session, error }
+		}
+
+		const { data: _profile, error: databaseError } = await supabase
+			.from('users')
+			.insert([
+				{
+					id: user?.id,
+					created_at: new Date().toISOString(),
+					email: user?.email,
+					last_logged_in_at: new Date().toISOString()
+				}
+			])
+
+		if (databaseError) {
+			return { user, session, error: databaseError }
+		}
 
 		setLoading(false)
 		return { user, session, error }

@@ -15,7 +15,7 @@ const SignUp = (): JSX.Element => {
 
 	useEffect(() => {
 		if (push) {
-			router.push('/email-verification')
+			router.push('/')
 		}
 	}, [push, router])
 
