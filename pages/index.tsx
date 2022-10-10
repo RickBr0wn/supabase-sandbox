@@ -15,7 +15,7 @@ const Home: NextPage = () => {
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 
-			<main>{user && session ? <Dashboard /> : <LogIn />}</main>
+			<main>A LIST OF PRODUCTS</main>
 		</div>
 	)
 }

@@ -1,6 +1,5 @@
-import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { ReactNode } from 'react'
+import { ReactNode, useEffect } from 'react'
 import { useAuth } from '../contexts/Auth'
 
 interface _ProtectedRouteProps {
@@ -11,9 +10,11 @@ const ProtectedRoute = ({ children }: _ProtectedRouteProps) => {
 	const { user, session } = useAuth()
 	const router = useRouter()
 
-	if (!user || !session) {
-		router.push('/login')
-	}
+	useEffect(() => {
+		if (!user || !session) {
+			router.push('/')
+		}
+	}, [user, session, router])
 
 	return <div>{children}</div>
 }

@@ -1,6 +1,9 @@
 import { useRouter } from 'next/router'
 import { useAuth } from '../contexts/Auth'
 import { HeartIcon, ShoppingCartIcon } from '../svg'
+import LogInIcon from '../svg/login-icon'
+import SignUpIcon from '../svg/signup-icon'
+import StoreFrontIcon from '../svg/store-front'
 import UserIcon from '../svg/userIcon'
 
 const Navbar = (): JSX.Element => {
@@ -10,19 +13,24 @@ const Navbar = (): JSX.Element => {
 	return (
 		<div>
 			{/* Top Navbar */}
-			{session ? (
-				<div className='bg-blue-100 flex justify-end px-2 py-1 text-sm items-center'>
-					Hello <span className='text-bold ml-1'>{session?.user?.email}</span>
-					<span className='px-2 text-xs cursor-pointer' onClick={signOut}>
-						[Log out]
-					</span>
-				</div>
-			) : null}
+			<div className='flex justify-end px-2 py-1 text-sm items-center h-6 border-b-2'>
+				{session && (
+					<div>
+						Hello <span className='text-bold ml-1'>{session?.user?.email}</span>
+						<span className='px-2 text-xs cursor-pointer' onClick={signOut}>
+							[Log out]
+						</span>
+					</div>
+				)}
+			</div>
 			{/* Main Navbar */}
 			<div className='py-2 px-4 border-b-2'>
 				{session ? (
 					<div className='flex justify-between items-center'>
-						<div>{session.user?.email}</div>
+						<div className='flex items-center gap-2'>
+							<StoreFrontIcon />
+							<span className='text-2xl font-bold'>E-Commerce</span>
+						</div>
 						<div className='flex gap-4 '>
 							<div
 								onClick={() => router.push('/account')}
@@ -49,7 +57,26 @@ const Navbar = (): JSX.Element => {
 					</div>
 				) : (
 					<div style={{ display: 'flex', justifyContent: 'space-between' }}>
-						<p>not logged in</p>
+						<div className='flex items-center gap-2'>
+							<StoreFrontIcon />
+							<span className='text-2xl font-bold'>E-Commerce</span>
+						</div>
+						<div className='flex gap-4 '>
+							<div
+								onClick={() => router.push('/login')}
+								className='flex flex-col items-center'
+							>
+								<LogInIcon />
+								<span className='text-xs hidden lg:block'>Log In</span>
+							</div>
+							<div
+								onClick={() => router.push('/signup')}
+								className='flex flex-col items-center'
+							>
+								<SignUpIcon />
+								<span className='text-xs hidden lg:block'>Sign Up</span>
+							</div>
+						</div>
 					</div>
 				)}
 			</div>
