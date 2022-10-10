@@ -1,11 +1,13 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { useAuth } from '../contexts/Auth'
+import { useDatabase } from '../contexts/Database'
 import Dashboard from './dashboard'
 import LogIn from './login'
 
 const Home: NextPage = () => {
 	const { user, session } = useAuth()
+	const { products } = useDatabase()
 
 	return (
 		<div>
@@ -16,6 +18,27 @@ const Home: NextPage = () => {
 			</Head>
 
 			<main>A LIST OF PRODUCTS</main>
+
+			<div>
+				{products.map(product => (
+					<div key={product.id}>
+						<h3>{product.product_name}</h3>
+						<div>
+							{product.product_image.map(image => (
+								<img
+									key={image}
+									src={image}
+									alt={product.product_name}
+									width='100'
+								/>
+							))}
+						</div>
+						<p>{product.product_description}</p>
+						<p>{product.product_price}</p>
+						<p>{product.product_quantity}</p>
+					</div>
+				))}
+			</div>
 		</div>
 	)
 }
