@@ -54,36 +54,51 @@ const SignUp = (): JSX.Element => {
 	}
 
 	return (
-		<div>
-			<h1>SignUp</h1>
-
-			<form
-				onSubmit={handleSubmit}
-				style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}
-			>
-				<input type='email' placeholder='email' ref={emailRef} required />
-				<input
-					type='password'
-					placeholder='password'
-					ref={passwordRef}
-					required
-				/>
-				<input
-					type='password'
-					placeholder='confirm password'
-					ref={passwordConfirmRef}
-					required
-				/>
-				<button type='submit'>Sign Up</button>
-			</form>
-			{error ? (
-				<p style={{ opacity: 1, color: 'red' }}>{error}</p>
-			) : (
-				<p style={{ opacity: 0 }}>unknown</p>
-			)}
-			<p>
-				Already have an account? <Link href='/login'>Log In</Link>
-			</p>
+		<div className='mt-14 flex flex-col justify-center items-center'>
+			<h1 className='text-3xl font-bold'>SignUp</h1>
+			<div className='border-2 p-4 rounded-md mx-4 max-w-xl mt-10'>
+				<form
+					onSubmit={handleSubmit}
+					className='flex flex-col items-center gap-4'
+				>
+					<input
+						className='border-2 w-full'
+						type='email'
+						placeholder='email'
+						ref={emailRef}
+						required
+					/>
+					<input
+						className='border-2 w-full'
+						type='password'
+						placeholder='password'
+						ref={passwordRef}
+						required
+					/>
+					<input
+						className='border-2 w-full'
+						type='password'
+						placeholder='confirm password'
+						ref={passwordConfirmRef}
+						required
+					/>
+					<button className='border-2 w-full' type='submit'>
+						Sign Up
+					</button>
+				</form>
+				{error ? (
+					<p style={{ opacity: 1, color: 'red' }}>{error}</p>
+				) : (
+					<p style={{ opacity: 0 }}>unknown</p>
+				)}
+				<div className='text-xs w-full flex flex-col justify-center items-center gap-2'>
+					<Link href='/login'>
+						<span className='text-blue-500 underline cursor-pointer'>
+							Already have an account?
+						</span>
+					</Link>
+				</div>
+			</div>
 		</div>
 	)
 }
