@@ -22,33 +22,33 @@ const Home: NextPage = () => {
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 
-			<main>A LIST OF PRODUCTS</main>
-
-			<div className='bg-red-100'>
-				{products.map(product => (
-					<div key={product.id} className=''>
-						<div className='grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8'>
-							<div>
-								<h3>{product.product_name}</h3>
-								{product.product_image.map(image => (
-									<BlurImageOnLoad
-										key={product.id}
-										image={{
-											id: product.id,
-											href: `/products/${product.id}`,
-											imageSrc: image,
-											name: product.product_name
-										}}
-									/>
-								))}
-								<p>{product.product_description}</p>
-								<p>{product.product_price}</p>
-								<p>{product.product_quantity}</p>
+			<main>
+				<div className='bg-red-100'>
+					{products.map(product => (
+						<div key={product.id} className=''>
+							<div className='grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8'>
+								<div>
+									<h3>{product.product_name}</h3>
+									{product.product_image.map(image => (
+										<BlurImageOnLoad
+											key={product.id}
+											image={{
+												id: product.id,
+												href: `/products/${product.id}`,
+												imageSrc: image,
+												name: product.product_name
+											}}
+										/>
+									))}
+									<p>{product.product_description}</p>
+									<p>{product.product_price}</p>
+									<p>{product.product_quantity}</p>
+								</div>
 							</div>
 						</div>
-					</div>
-				))}
-			</div>
+					))}
+				</div>
+			</main>
 		</div>
 	)
 }
