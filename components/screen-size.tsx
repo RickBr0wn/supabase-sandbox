@@ -1,4 +1,8 @@
-const ScreenSize = () => {
+import { FC } from 'react'
+
+type Props = {}
+
+const ScreenSize: FC<Props> = () => {
 	return (
 		<div>
 			{/* <div className='h-14 bg-blue-50' /> */}

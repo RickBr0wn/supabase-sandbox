@@ -107,6 +107,18 @@ export const AuthProvider = ({ children }: _AuthProviderProps) => {
 			email,
 			password
 		})
+
+		const { data: _profile, error: databaseError } = await supabase
+			.from('users')
+			.update({
+				last_logged_in_at: new Date(Date.now()).toISOString()
+			})
+			.eq('id', user?.id)
+
+		if (databaseError) {
+			return { user, session, error: databaseError }
+		}
+
 		setLoading(false)
 		return { user, session, error }
 	}

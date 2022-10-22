@@ -1,12 +1,12 @@
-import { ReactNode } from 'react'
+import { FC, ReactNode } from 'react'
 import Navbar from './navbar'
 import ScreenSize from './screen-size'
 
-interface _LayoutProps {
+type Props = {
 	children: ReactNode
 }
 
-const Layout = ({ children }: _LayoutProps): JSX.Element => {
+const Layout: FC<Props> = ({ children }): JSX.Element => {
 	return (
 		<div>
 			<ScreenSize />

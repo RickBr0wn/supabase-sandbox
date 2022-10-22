@@ -1,9 +1,14 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
+import { useEffect, useState } from 'react'
+import BlurImageOnLoad from '../components/blur-image'
+import ImagePicker from '../components/image-picker'
 import { useAuth } from '../contexts/Auth'
 import { useDatabase } from '../contexts/Database'
+import { supabase } from '../lib/superbase'
 import Dashboard from './dashboard'
 import LogIn from './login'
+import Image from 'next/image'
 
 const Home: NextPage = () => {
 	const { user, session } = useAuth()
@@ -17,28 +22,33 @@ const Home: NextPage = () => {
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 
-			<main>A LIST OF PRODUCTS</main>
-
-			<div>
-				{products.map(product => (
-					<div key={product.id}>
-						<h3>{product.product_name}</h3>
-						<div>
-							{product.product_image.map(image => (
-								<img
-									key={image}
-									src={image}
-									alt={product.product_name}
-									width='100'
-								/>
-							))}
+			<main>
+				<div className='bg-red-100'>
+					{products.map(product => (
+						<div key={product.id} className=''>
+							<div className='grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8'>
+								<div>
+									<h3>{product.product_name}</h3>
+									{product.product_image.map(image => (
+										<BlurImageOnLoad
+											key={product.id}
+											image={{
+												id: product.id,
+												href: `/products/${product.id}`,
+												imageSrc: image,
+												name: product.product_name
+											}}
+										/>
+									))}
+									<p>{product.product_description}</p>
+									<p>{product.product_price}</p>
+									<p>{product.product_quantity}</p>
+								</div>
+							</div>
 						</div>
-						<p>{product.product_description}</p>
-						<p>{product.product_price}</p>
-						<p>{product.product_quantity}</p>
-					</div>
-				))}
-			</div>
+					))}
+				</div>
+			</main>
 		</div>
 	)
 }

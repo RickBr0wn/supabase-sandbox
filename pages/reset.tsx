@@ -1,9 +1,10 @@
+import { NextPage } from 'next'
 import Link from 'next/link'
 import { useState } from 'react'
 import ProtectedRoute from '../components/protected'
 import { useAuth } from '../contexts/Auth'
 
-const ResetPassword = (): JSX.Element => {
+const ResetPassword: NextPage = (): JSX.Element => {
 	const [error, setError] = useState<string | null>(null)
 	const [success, setSuccess] = useState<string | null>(null)
 	const [loading, setLoading] = useState<boolean>(false)

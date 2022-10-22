@@ -1,6 +1,11 @@
+import { NextPage } from 'next'
 import ProtectedRoute from '../components/protected'
 
-const Account = (): JSX.Element => {
+type Props = {
+	data: any
+}
+
+const Account: NextPage<Props> = ({ data }): JSX.Element => {
 	return (
 		<ProtectedRoute>
 			<div>

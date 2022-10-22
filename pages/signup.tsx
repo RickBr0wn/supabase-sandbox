@@ -1,9 +1,10 @@
+import { NextPage } from 'next'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect, useRef, useState } from 'react'
 import { useAuth } from '../contexts/Auth'
 
-const SignUp = (): JSX.Element => {
+const SignUp: NextPage = (): JSX.Element => {
 	const emailRef = useRef<HTMLInputElement>(null)
 	const passwordRef = useRef<HTMLInputElement>(null)
 	const passwordConfirmRef = useRef<HTMLInputElement>(null)

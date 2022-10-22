@@ -1,4 +1,6 @@
-const EmailVerification = (): JSX.Element => {
+import { NextPage } from 'next'
+
+const EmailVerification: NextPage = (): JSX.Element => {
 	return (
 		<div>
 			<h1>EmailVerification</h1>

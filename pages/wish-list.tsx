@@ -1,6 +1,7 @@
+import { NextPage } from 'next'
 import ProtectedRoute from '../components/protected'
 
-const WishList = () => {
+const WishList: NextPage = (): JSX.Element => {
 	return (
 		<ProtectedRoute>
 			<div>

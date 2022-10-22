@@ -1,6 +1,7 @@
+import { NextPage } from 'next'
 import ProtectedRoute from '../components/protected'
 
-const ShoppingCart = (): JSX.Element => {
+const ShoppingCart: NextPage = (): JSX.Element => {
 	return (
 		<ProtectedRoute>
 			<div>
