@@ -1,23 +1,16 @@
 import Link from 'next/link'
-import { useState } from 'react'
+import { FC, useState } from 'react'
 import Image from 'next/image'
 
 const _classes = (...classes: string[]): string => {
 	return classes.filter(Boolean).join(' ')
 }
 
-interface _Image {
-	id: string
-	href: string
-	imageSrc: string
-	name: string
-}
-
-interface _LazyLoadImageProps {
+type Props = {
 	image: _Image
 }
 
-const BlurImageOnLoad = ({ image }: _LazyLoadImageProps): JSX.Element => {
+const BlurImageOnLoad: FC<Props> = ({ image }): JSX.Element => {
 	const [isLoading, setIsLoading] = useState<boolean>(true)
 
 	return (
@@ -25,7 +18,7 @@ const BlurImageOnLoad = ({ image }: _LazyLoadImageProps): JSX.Element => {
 			<a className='group'>
 				<div className='w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8'>
 					<Image
-						alt='image placeholder'
+						alt={image.name}
 						src={image.imageSrc}
 						layout='responsive'
 						height={100}

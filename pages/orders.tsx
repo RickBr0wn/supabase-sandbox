@@ -1,6 +1,7 @@
+import { NextPage } from 'next'
 import ProtectedRoute from '../components/protected'
 
-const Orders = (): JSX.Element => {
+const Orders: NextPage = (): JSX.Element => {
 	return (
 		<ProtectedRoute>
 			<div>

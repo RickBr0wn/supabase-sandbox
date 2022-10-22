@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router'
+import { FC } from 'react'
 import { useAuth } from '../contexts/Auth'
 import { HeartIcon, ShoppingCartIcon } from '../svg'
 import LogInIcon from '../svg/login-icon'
@@ -6,7 +7,9 @@ import SignUpIcon from '../svg/signup-icon'
 import StoreFrontIcon from '../svg/store-front'
 import UserIcon from '../svg/userIcon'
 
-const Navbar = (): JSX.Element => {
+type Props = {}
+
+const Navbar: FC<Props> = (): JSX.Element => {
 	const { session, signOut } = useAuth()
 	const router = useRouter()
 
