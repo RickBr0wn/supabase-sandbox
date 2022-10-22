@@ -9,6 +9,8 @@ import { supabase } from '../lib/superbase'
 import Dashboard from './dashboard'
 import LogIn from './login'
 import Image from 'next/image'
+import Grid from '../components/grid'
+import Card from '../components/card'
 
 const Home: NextPage = () => {
 	const { user, session } = useAuth()
@@ -23,31 +25,18 @@ const Home: NextPage = () => {
 			</Head>
 
 			<main>
-				<div className='bg-red-100'>
+				<Grid
+					className='p-4 max-w-7xl m-auto'
+					title={`Products: ${products.length}`}
+				>
 					{products.map(product => (
-						<div key={product.id} className=''>
-							<div className='grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8'>
-								<div>
-									<h3>{product.product_name}</h3>
-									{product.product_image.map(image => (
-										<BlurImageOnLoad
-											key={product.id}
-											image={{
-												id: product.id,
-												href: `/products/${product.id}`,
-												imageSrc: image,
-												name: product.product_name
-											}}
-										/>
-									))}
-									<p>{product.product_description}</p>
-									<p>{product.product_price}</p>
-									<p>{product.product_quantity}</p>
-								</div>
-							</div>
-						</div>
+						<Card
+							key={product.id}
+							imgUrl={product.product_image[0]}
+							title={product.product_name}
+						/>
 					))}
-				</div>
+				</Grid>
 			</main>
 		</div>
 	)

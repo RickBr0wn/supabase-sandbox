@@ -9,16 +9,6 @@ import {
 import { supabase } from '../lib/superbase'
 import { useAuth } from './Auth'
 
-interface _Product {
-	id: string
-	created_at: string
-	product_name: string
-	product_image: string[]
-	product_description: string
-	product_price: number
-	product_quantity: number
-}
-
 interface _DatabaseContext {
 	user: User | null
 	products: _Product[]
@@ -58,7 +48,7 @@ export const DatabaseProvider = ({ children }: _DatabaseProviderProps) => {
 				setProducts(data)
 			}
 		}
-
+		console.log('api call made')
 		fetchProducts()
 	}, [])
 
