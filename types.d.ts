@@ -5,7 +5,7 @@ interface _Image {
 	name: string
 }
 
-interface _Product {
+interface Product {
 	id: string
 	created_at: string
 	product_name: string

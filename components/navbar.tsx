@@ -4,6 +4,7 @@ import { useAuth } from '../contexts/Auth'
 import { HeartIcon, ShoppingCartIcon } from '../svg'
 import LogInIcon from '../svg/login-icon'
 import SignUpIcon from '../svg/signup-icon'
+import StatsIcon from '../svg/stats'
 import StoreFrontIcon from '../svg/store-front'
 import UserIcon from '../svg/userIcon'
 
@@ -30,7 +31,10 @@ const Navbar: FC<Props> = (): JSX.Element => {
 			<div className='py-2 px-4 border-b-2'>
 				{session ? (
 					<div className='flex justify-between items-center'>
-						<div className='flex items-center gap-2'>
+						<div
+							className='flex items-center gap-2 cursor-pointer'
+							onClick={() => router.push('/')}
+						>
 							<StoreFrontIcon />
 							<span className='text-2xl font-bold'>E-Commerce</span>
 						</div>
@@ -40,6 +44,13 @@ const Navbar: FC<Props> = (): JSX.Element => {
 								className='flex flex-col items-center'
 							>
 								<UserIcon />
+								<span className='text-xs hidden lg:block'>Account</span>
+							</div>
+							<div
+								onClick={() => router.push('/dashboard')}
+								className='flex flex-col items-center'
+							>
+								<StatsIcon />
 								<span className='text-xs hidden lg:block'>Account</span>
 							</div>
 							<div
