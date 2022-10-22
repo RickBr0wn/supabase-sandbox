@@ -1,26 +1,17 @@
 import { User } from '@supabase/supabase-js'
-import {
-	createContext,
-	ReactNode,
-	useContext,
-	useEffect,
-	useState
-} from 'react'
+import { createContext, FC, ReactNode, useContext, useState } from 'react'
+import { useQuery } from 'react-query'
 import { supabase } from '../lib/superbase'
 import { useAuth } from './Auth'
 
-interface _DatabaseContext {
+type DatabaseContext = {
 	user: User | null
-	products: _Product[]
+	products: Product[]
 }
 
-interface _DatabaseProviderProps {
-	children: ReactNode
-}
+const DatabaseContext = createContext({} as DatabaseContext)
 
-const DatabaseContext = createContext({} as _DatabaseContext)
-
-export function useDatabase(): _DatabaseContext {
+export function useDatabase(): DatabaseContext {
 	const context = useContext(DatabaseContext)
 
 	if (!context) {
@@ -30,29 +21,32 @@ export function useDatabase(): _DatabaseContext {
 	return context
 }
 
-export const DatabaseProvider = ({ children }: _DatabaseProviderProps) => {
+type Props = {
+	children: ReactNode
+}
+
+export const DatabaseProvider: FC<Props> = ({ children }): JSX.Element => {
 	const { user } = useAuth()
-	const [products, setProducts] = useState<_Product[]>([])
+	const [products, setProducts] = useState<Product[]>([])
 
-	useEffect(() => {
-		const fetchProducts = async () => {
-			const { data, error } = await supabase
-				.from<_Product>('products')
-				.select('*')
-
-			if (error) {
-				console.log(error)
-			}
-
-			if (data) {
-				setProducts(data)
-			}
-		}
+	const fetchProducts = async () => {
 		console.log('api call made')
-		fetchProducts()
-	}, [])
+		const { data, error } = await supabase.from<Product>('products').select('*')
 
-	const value: _DatabaseContext = {
+		if (error) {
+			console.log(error)
+		}
+
+		if (data) {
+			setProducts(data)
+		}
+	}
+
+	const query = useQuery('products', fetchProducts, {
+		enabled: !!user
+	})
+
+	const value: DatabaseContext = {
 		user,
 		products
 	}

@@ -1,6 +1,7 @@
 import { ApiError, PostgrestError, Session, User } from '@supabase/supabase-js'
 import {
 	createContext,
+	FC,
 	ReactNode,
 	useContext,
 	useEffect,
@@ -8,29 +9,25 @@ import {
 } from 'react'
 import { supabase } from '../lib/superbase'
 
-interface _AuthContext {
+type AuthContext = {
 	user: User | null
 	session: Session | null
 	loading: boolean
 	forgotPassword: (email: string) => Promise<ApiError | null>
-	signUp: (email: string, password: string) => Promise<_AuthResponse>
-	signIn: (email: string, password: string) => Promise<_AuthResponse>
+	signUp: (email: string, password: string) => Promise<AuthResponse>
+	signIn: (email: string, password: string) => Promise<AuthResponse>
 	signOut: () => Promise<ApiError | null>
 }
 
-interface _AuthProviderProps {
-	children: ReactNode
-}
-
-interface _AuthResponse {
+type AuthResponse = {
 	user: User | null
 	session: Session | null
 	error: ApiError | PostgrestError | null
 }
 
-const AuthContext = createContext({} as _AuthContext)
+const AuthContext = createContext({} as AuthContext)
 
-export function useAuth(): _AuthContext {
+export function useAuth(): AuthContext {
 	const context = useContext(AuthContext)
 
 	if (!context) {
@@ -40,7 +37,11 @@ export function useAuth(): _AuthContext {
 	return context
 }
 
-export const AuthProvider = ({ children }: _AuthProviderProps) => {
+type Props = {
+	children: ReactNode
+}
+
+export const AuthProvider: FC<Props> = ({ children }) => {
 	const [user, setUser] = useState<User | null>(null)
 	const [session, setSession] = useState<Session | null>(null)
 	const [loading, setLoading] = useState<boolean>(true)
@@ -68,7 +69,7 @@ export const AuthProvider = ({ children }: _AuthProviderProps) => {
 	const signUp = async (
 		email: string,
 		password: string
-	): Promise<_AuthResponse> => {
+	): Promise<AuthResponse> => {
 		setLoading(true)
 		const { user, session, error } = await supabase.auth.signUp({
 			email,
@@ -101,7 +102,7 @@ export const AuthProvider = ({ children }: _AuthProviderProps) => {
 	const signIn = async (
 		email: string,
 		password: string
-	): Promise<_AuthResponse> => {
+	): Promise<AuthResponse> => {
 		setLoading(true)
 		const { user, session, error } = await supabase.auth.signIn({
 			email,
@@ -137,7 +138,7 @@ export const AuthProvider = ({ children }: _AuthProviderProps) => {
 		return error
 	}
 
-	const value = {
+	const value: AuthContext = {
 		user,
 		session,
 		loading,
