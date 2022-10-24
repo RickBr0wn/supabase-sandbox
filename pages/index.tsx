@@ -12,6 +12,7 @@ import Image from 'next/image'
 import Grid from '../components/grid'
 import Card from '../components/card'
 import Hero from '../components/hero'
+import Adverts from '../components/adverts'
 
 const Home: NextPage = () => {
 	const { user, session } = useAuth()
@@ -25,8 +26,9 @@ const Home: NextPage = () => {
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 
-			<main className='max-w-screen w-full h-full'>
+			<main className=' w-full h-full'>
 				<Hero />
+				<Adverts />
 
 				{/* <Grid
 					className='p-4 max-w-7xl m-auto'

@@ -28,7 +28,7 @@ const Navbar: FC<Props> = (): JSX.Element => {
 				)}
 			</div>
 			{/* Main Navbar */}
-			<div className='py-2 px-4 border-b-2'>
+			<div className='py-2 px-4 border-b-2 bg-transparent'>
 				{session ? (
 					<div className='flex justify-between items-center'>
 						<div

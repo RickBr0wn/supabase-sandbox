@@ -2,16 +2,16 @@ import { FC } from 'react'
 import { ReactNode } from 'react'
 
 type Props = {
-	title: string
 	className?: string
 	children: ReactNode
 }
 
-const Grid: FC<Props> = ({ className, children, title }): JSX.Element => {
+const Grid: FC<Props> = ({ className, children }): JSX.Element => {
 	return (
-		<div className={className}>
-			<h2 className='text-xl font-bold pb-4'>{title}</h2>
-			<div className='grid grid-cols-auto-fill gap-8'>{children}</div>
+		<div
+			className={`${className} m-auto grid grid-cols-3 gap-2 p-4 md:p-8 md:gap-6  max-w-7xl lg:px-[20px] lg:gap-10`}
+		>
+			{children}
 		</div>
 	)
 }
