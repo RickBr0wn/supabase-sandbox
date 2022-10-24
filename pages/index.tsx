@@ -11,10 +11,11 @@ import LogIn from './login'
 import Image from 'next/image'
 import Grid from '../components/grid'
 import Card from '../components/card'
+import Hero from '../components/hero'
 
 const Home: NextPage = () => {
 	const { user, session } = useAuth()
-	const { products } = useDatabase()
+	// const { products } = useDatabase()
 
 	return (
 		<div>
@@ -24,8 +25,10 @@ const Home: NextPage = () => {
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 
-			<main>
-				<Grid
+			<main className='max-w-screen w-full h-full'>
+				<Hero />
+
+				{/* <Grid
 					className='p-4 max-w-7xl m-auto'
 					title={`Products: ${products.length}`}
 				>
@@ -36,7 +39,7 @@ const Home: NextPage = () => {
 							title={product.product_name}
 						/>
 					))}
-				</Grid>
+				</Grid> */}
 			</main>
 		</div>
 	)

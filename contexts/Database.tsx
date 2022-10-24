@@ -5,8 +5,8 @@ import { supabase } from '../lib/superbase'
 import { useAuth } from './Auth'
 
 type DatabaseContext = {
-	user: User | null
 	products: Product[]
+	addProduct: (product: Product) => Promise<void>
 }
 
 const DatabaseContext = createContext({} as DatabaseContext)
@@ -26,11 +26,9 @@ type Props = {
 }
 
 export const DatabaseProvider: FC<Props> = ({ children }): JSX.Element => {
-	const { user } = useAuth()
 	const [products, setProducts] = useState<Product[]>([])
 
 	const fetchProducts = async () => {
-		console.log('api call made')
 		const { data, error } = await supabase.from<Product>('products').select('*')
 
 		if (error) {
@@ -42,13 +40,31 @@ export const DatabaseProvider: FC<Props> = ({ children }): JSX.Element => {
 		}
 	}
 
-	const query = useQuery('products', fetchProducts, {
-		enabled: !!user
-	})
+	/**
+	 * Add a new product to the database
+	 * @param product
+	 * @returns *Promise* void
+	 */
+	const addProduct = async (product: Product): Promise<void> => {
+		const { data, error } = await supabase
+			.from<Product>('products')
+			.insert(product)
+
+		if (error) {
+			console.log(error)
+		}
+
+		if (data) {
+			setProducts([...products, data[0]])
+			console.log(`Product ${data[0].product_name} added`)
+		}
+	}
+
+	useQuery('products', fetchProducts)
 
 	const value: DatabaseContext = {
-		user,
-		products
+		products,
+		addProduct
 	}
 
 	return (

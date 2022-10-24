@@ -51,7 +51,7 @@ const Navbar: FC<Props> = (): JSX.Element => {
 								className='flex flex-col items-center'
 							>
 								<StatsIcon />
-								<span className='text-xs hidden lg:block'>Account</span>
+								<span className='text-xs hidden lg:block'>Dashboard</span>
 							</div>
 							<div
 								onClick={() => router.push('/wish-list')}

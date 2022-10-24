@@ -66,6 +66,12 @@ export const AuthProvider: FC<Props> = ({ children }) => {
 		}
 	}, [])
 
+	/**
+	 * Sign up a new user with email and password
+	 * @param email
+	 * @param password
+	 * @returns *Promise* AuthResponse
+	 */
 	const signUp = async (
 		email: string,
 		password: string
@@ -99,6 +105,12 @@ export const AuthProvider: FC<Props> = ({ children }) => {
 		return { user, session, error }
 	}
 
+	/**
+	 * Sign in an existing user with email and password
+	 * @param email
+	 * @param password
+	 * @returns *Promise* AuthResponse
+	 * */
 	const signIn = async (
 		email: string,
 		password: string
@@ -124,6 +136,10 @@ export const AuthProvider: FC<Props> = ({ children }) => {
 		return { user, session, error }
 	}
 
+	/**
+	 * Sign out the current user
+	 * @returns *Promise* ApiError | null
+	 * */
 	const signOut = async (): Promise<ApiError | null> => {
 		setLoading(true)
 		const { error } = await supabase.auth.signOut()
@@ -131,6 +147,11 @@ export const AuthProvider: FC<Props> = ({ children }) => {
 		return error
 	}
 
+	/**
+	 * Send a password reset email to the user
+	 * @param email
+	 * @returns *Promise* ApiError | null
+	 * */
 	const forgotPassword = async (email: string): Promise<ApiError | null> => {
 		setLoading(true)
 		const { error } = await supabase.auth.api.resetPasswordForEmail(email)
