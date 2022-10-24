@@ -14,7 +14,7 @@ const Dashboard: NextPage<Props> = (): JSX.Element => {
 		<ProtectedRoute>
 			<div>
 				<ProductList />
-				<ProductEntry />
+				<ProductEntry  />
 			</div>
 		</ProtectedRoute>
 	)

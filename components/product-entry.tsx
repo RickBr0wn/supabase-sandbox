@@ -2,7 +2,7 @@ import { FC, useRef } from 'react'
 import { useDatabase } from '../contexts/Database'
 
 type Props = {
-	product: Product
+	product?: Product
 }
 
 const ProductEntry: FC<Props> = (): JSX.Element => {
